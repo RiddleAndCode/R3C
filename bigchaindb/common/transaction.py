@@ -16,7 +16,7 @@ from functools import reduce, lru_cache
 import rapidjson
 
 import base58
-from cryptoconditions import Fulfillment, ThresholdSha256, Ed25519Sha256
+from cryptoconditions import Fulfillment, ThresholdSha256, Ed25519Sha256, ZenroomSha256
 from cryptoconditions.exceptions import (
     ParsingError, ASN1DecodeError, ASN1EncodeError, UnsupportedTypeError)
 from sha3 import sha3_256
@@ -204,6 +204,10 @@ def _fulfillment_from_details(data, _depth=0):
             cond = _fulfillment_from_details(cond, _depth+1)
             threshold.add_subfulfillment(cond)
         return threshold
+
+    if data['type'] == 'zenroom-sha-256':
+        public_key = base58.b58decode(data['public_key'])
+        return ZenroomSha256(public_key=public_key)
 
     raise UnsupportedTypeError(data.get('type'))
 

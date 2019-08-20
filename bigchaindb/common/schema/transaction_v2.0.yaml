@@ -65,6 +65,7 @@ definitions:
     - VALIDATOR_ELECTION
     - CHAIN_MIGRATION_ELECTION
     - VOTE
+    - PLANETARY_MAGIC
   asset:
     type: object
     additionalProperties: false
@@ -83,6 +84,13 @@ definitions:
     - amount
     - condition
     - public_keys
+    optional:
+    - did
+    - script
+    - keys
+    - data
+    - conf
+    - verbosity
     properties:
       amount:
         type: string
@@ -93,14 +101,45 @@ definitions:
         required:
         - details
         - uri
+        optional:
+        - did
+        - script
+        - keys
+        - data
+        - conf
+        - verbosity
         properties:
           details:
             "$ref": "#/definitions/condition_details"
           uri:
             type: string
             pattern: "^ni:///sha-256;([a-zA-Z0-9_-]{0,86})[?]\
-              (fpt=(ed25519|threshold)-sha-256(&)?|cost=[0-9]+(&)?|\
+              (fpt=(ed25519|zenroom|threshold)-sha-256(&)?|cost=[0-9]+(&)?|\
               subtypes=ed25519-sha-256(&)?){2,3}$"
+          did:
+            type: string
+          script:
+            type: string
+          keys:
+            type: string
+          data:
+            type: string
+          conf:
+            type: string
+          verbosity:
+            type: string
+      did:
+        type: string
+      script:
+        type: string
+      keys:
+        type: string
+      data:
+        type: string
+      conf:
+        type: string
+      verbosity:
+        type: string
       public_keys:
         "$ref": "#/definitions/public_keys"
   input:
@@ -147,6 +186,17 @@ definitions:
         type:
           type: string
           pattern: "^ed25519-sha-256$"
+        public_key:
+          "$ref": "#/definitions/base58"
+    - type: object
+      additionalProperties: false
+      required:
+      - type
+      - public_key
+      properties:
+        type:
+          type: string
+          pattern: "^zenroom-sha-256$"
         public_key:
           "$ref": "#/definitions/base58"
     - type: object
