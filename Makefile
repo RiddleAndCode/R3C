@@ -66,6 +66,9 @@ dev: check-deps
 	@$(DC) up -d --no-deps mongodb tendermint
 	@$(BDB) -l DEBUG start
 
+clear:
+	@$(DC) down -v
+
 start: check-deps ## Run BigchainDB from source and daemonize it (stop with `make stop`)
 	@$(DC) up -d bigchaindb
 
@@ -114,6 +117,9 @@ dist: clean ## builds source (and not for now, wheel package)
 	python setup.py sdist
 	# python setup.py bdist_wheel
 	ls -l dist
+
+install:
+	pip install -e "git+git@github.com:RiddleAndCode/cryptoconditions.git@development#egg=cryptoconditions" -e .
 
 ###############
 # Sub targets #
