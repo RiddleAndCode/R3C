@@ -30,7 +30,6 @@ from bigchaindb.common.exceptions import (KeypairMismatchException,
 from bigchaindb.common.utils import serialize
 from .memoize import memoize_from_dict, memoize_to_dict
 
-
 UnspentOutput = namedtuple(
     'UnspentOutput', (
         # TODO 'utxo_hash': sha3_256(f'{txid}{output_index}'.encode())
@@ -164,25 +163,28 @@ def _fulfillment_to_details(fulfillment):
     Args:
         fulfillment: Crypto-conditions Fulfillment object
     """
+    # TODO test / delete unnecessary code
 
-    if fulfillment.type_name == 'ed25519-sha-256':
-        return {
-            'type': 'ed25519-sha-256',
-            'public_key': base58.b58encode(fulfillment.public_key).decode(),
-        }
+    # if fulfillment.type_name == 'ed25519-sha-256':
+    #     return {
+    #         'type': 'ed25519-sha-256',
+    #         'public_key': base58.b58encode(fulfillment.public_key).decode(),
+    #     }
 
-    if fulfillment.type_name == 'threshold-sha-256':
-        subconditions = [
-            _fulfillment_to_details(cond['body'])
-            for cond in fulfillment.subconditions
-        ]
-        return {
-            'type': 'threshold-sha-256',
-            'threshold': fulfillment.threshold,
-            'subconditions': subconditions,
-        }
+    # if fulfillment.type_name == 'threshold-sha-256':
+    #     subconditions = [
+    #         _fulfillment_to_details(cond['body'])
+    #         for cond in fulfillment.subconditions
+    #     ]
+    #     return {
+    #         'type': 'threshold-sha-256',
+    #         'threshold': fulfillment.threshold,
+    #         'subconditions': subconditions,
+    #     }
 
-    raise UnsupportedTypeError(fulfillment.type_name)
+    # raise UnsupportedTypeError(fulfillment.type_name)
+
+    return fulfillment.to_dict()
 
 
 def _fulfillment_from_details(data, _depth=0):
@@ -191,25 +193,29 @@ def _fulfillment_from_details(data, _depth=0):
     Args:
         data: tx.output[].condition.details dictionary
     """
-    if _depth == 100:
-        raise ThresholdTooDeep()
+    # TODO implement threshold / test / delete this
 
-    if data['type'] == 'ed25519-sha-256':
-        public_key = base58.b58decode(data['public_key'])
-        return Ed25519Sha256(public_key=public_key)
+    # if _depth == 100:
+    #     raise ThresholdTooDeep()
 
-    if data['type'] == 'threshold-sha-256':
-        threshold = ThresholdSha256(data['threshold'])
-        for cond in data['subconditions']:
-            cond = _fulfillment_from_details(cond, _depth+1)
-            threshold.add_subfulfillment(cond)
-        return threshold
+    # if data['type'] == 'ed25519-sha-256':
+    #     public_key = base58.b58decode(data['public_key'])
+    #     return Ed25519Sha256(public_key=public_key)
 
-    if data['type'] == 'zenroom-sha-256':
-        public_key = base58.b58decode(data['public_key'])
-        return ZenroomSha256(public_key=public_key)
+    # if data['type'] == 'threshold-sha-256':
+    #     threshold = ThresholdSha256(data['threshold'])
+    #     for cond in data['subconditions']:
+    #         cond = _fulfillment_from_details(cond, _depth+1)
+    #         threshold.add_subfulfillment(cond)
+    #     return threshold
 
-    raise UnsupportedTypeError(data.get('type'))
+    # if data['type'] == 'zenroom-sha-256':
+    #     script = base58.b58decode(data['script'])
+    #     return ZenroomSha256(script=script)
+
+    # raise UnsupportedTypeError(data.get('type'))
+
+    return Fulfillment.from_dict(data)
 
 
 class TransactionLink(object):

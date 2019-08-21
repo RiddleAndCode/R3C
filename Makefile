@@ -119,7 +119,10 @@ dist: clean ## builds source (and not for now, wheel package)
 	ls -l dist
 
 install:
-	pip install -e "git+git@github.com:RiddleAndCode/cryptoconditions.git@development#egg=cryptoconditions" -e .
+	pip install \
+		-e "git+git@github.com:RiddleAndCode/zenroom-py.git@development#egg=zenroom" \
+		-e "git+git@github.com:RiddleAndCode/cryptoconditions.git@development#egg=cryptoconditions" \
+		-e .
 
 ###############
 # Sub targets #
