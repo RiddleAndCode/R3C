@@ -120,7 +120,7 @@ dist: clean ## builds source (and not for now, wheel package)
 
 install:
 	pip install \
-		-e "git+git@github.com:RiddleAndCode/zenroom-py.git@development#egg=zenroom" \
+		-e "git+git@github.com:RiddleAndCode/zenroom_minimal_py.git@master#egg=zenroom_minimal" \
 		-e "git+git@github.com:RiddleAndCode/cryptoconditions.git@development#egg=cryptoconditions" \
 		-e .
 
