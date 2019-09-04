@@ -87,10 +87,6 @@ definitions:
     optional:
     - did
     - script
-    - keys
-    - data
-    - conf
-    - verbosity
     properties:
       amount:
         type: string
@@ -104,10 +100,6 @@ definitions:
         optional:
         - did
         - script
-        - keys
-        - data
-        - conf
-        - verbosity
         properties:
           details:
             "$ref": "#/definitions/condition_details"
@@ -120,25 +112,9 @@ definitions:
             type: string
           script:
             type: string
-          keys:
-            type: string
-          data:
-            type: string
-          conf:
-            type: string
-          verbosity:
-            type: string
       did:
         type: string
       script:
-        type: string
-      keys:
-        type: string
-      data:
-        type: string
-      conf:
-        type: string
-      verbosity:
         type: string
       public_keys:
         "$ref": "#/definitions/public_keys"
@@ -192,12 +168,12 @@ definitions:
       additionalProperties: false
       required:
       - type
-      - public_key
+      - script
       properties:
         type:
           type: string
           pattern: "^zenroom-sha-256$"
-        public_key:
+        script:
           "$ref": "#/definitions/base58"
     - type: object
       additionalProperties: false
