@@ -118,12 +118,6 @@ dist: clean ## builds source (and not for now, wheel package)
 	# python setup.py bdist_wheel
 	ls -l dist
 
-install:
-	pip install \
-		-e "git+git@github.com:RiddleAndCode/zenroom_minimal_py.git@master#egg=zenroom_minimal" \
-		-e "git+git@github.com:RiddleAndCode/cryptoconditions.git@development#egg=cryptoconditions" \
-		-e .
-
 ###############
 # Sub targets #
 ###############
