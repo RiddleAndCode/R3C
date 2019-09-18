@@ -7,3 +7,6 @@
 .travis.yml
 BigchainDB.egg-info/
 dist/
+Dockerfile
+Dockerfile-*
+docker-compose.yml
