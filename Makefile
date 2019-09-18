@@ -42,7 +42,6 @@ export PRINT_HELP_PYSCRIPT
 ##################
 DOCKER := docker
 DC := docker-compose
-BDB := bigchaindb
 BROWSER := python -c "$$BROWSER_PYSCRIPT"
 HELP := python -c "$$PRINT_HELP_PYSCRIPT"
 ECHO := /usr/bin/env echo
@@ -61,13 +60,6 @@ run: check-deps ## Run BigchainDB from source (stop it with ctrl+c)
 	# launch them first otherwise tendermint will get stuck upon sending yet another log
 	# due to some docker-compose issue; does not happen when containers are run as daemons
 	@$(DC) up --no-deps mongodb tendermint bigchaindb
-
-dev: check-deps
-	@$(DC) up -d --no-deps mongodb tendermint
-	@$(BDB) -l DEBUG start
-
-clear:
-	@$(DC) down -v
 
 start: check-deps ## Run BigchainDB from source and daemonize it (stop with `make stop`)
 	@$(DC) up -d bigchaindb

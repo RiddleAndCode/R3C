@@ -12,7 +12,6 @@ services:
     ports:
       - "27017:27017"
     command: mongod
-    network_mode: host # TODO remove this
     restart: always
   bigchaindb:
     depends_on:
@@ -49,16 +48,16 @@ services:
       timeout: 5s
       retries: 3
     command: '.ci/entrypoint.sh'
-    network_mode: host # TODO remove this
     restart: always
   tendermint:
     image: tendermint/tendermint:0.22.8
+    # volumes:
+    #   - ./tmdata:/tendermint
     entrypoint: ''
     ports:
       - "26656:26656"
       - "26657:26657"
-    command: sh -c "tendermint init && tendermint node --trace --consensus.create_empty_blocks=false --proxy_app=tcp://localhost:26658"
-    network_mode: host # TODO remove this
+    command: sh -c "tendermint init && tendermint node --trace --consensus.create_empty_blocks=false --proxy_app=tcp://bigchaindb:26658"
     restart: always
   bdb:
     image: busybox
