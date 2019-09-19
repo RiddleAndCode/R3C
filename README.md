@@ -16,9 +16,9 @@ so show the latest GitHub release instead.
 [![Documentation Status](https://readthedocs.org/projects/bigchaindb-server/badge/?version=latest)](https://docs.bigchaindb.com/projects/server/en/latest/)
 [![Join the chat at https://gitter.im/bigchaindb/bigchaindb](https://badges.gitter.im/bigchaindb/bigchaindb.svg)](https://gitter.im/bigchaindb/bigchaindb?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-# BigchainDB Server
+# R3C Server
 
-BigchainDB is the blockchain database. This repository is for _BigchainDB Server_.
+R3C is the blockchain database. This repository is for _R3C Server_.
 
 ## The Basics
 
@@ -26,29 +26,29 @@ BigchainDB is the blockchain database. This repository is for _BigchainDB Server
 * [Read the BigchainDB 2.0 whitepaper](https://www.bigchaindb.com/whitepaper/)
 * [Check out the _Hitchiker's Guide to BigchainDB_](https://www.bigchaindb.com/developers/guide/)
 
-## Run and Test BigchainDB Server from the `master` Branch
+## Run and Test R3C Server from the `master` Branch
 
-Running and testing the latest version of BigchainDB Server is easy. Make sure you have a recent version of [Docker Compose](https://docs.docker.com/compose/install/) installed. When you are ready, fire up a terminal and run:
+Running and testing the latest version of R3C Server is easy. Make sure you have a recent version of [Docker Compose](https://docs.docker.com/compose/install/) installed. When you are ready, fire up a terminal and run:
 
 ```text
-git clone https://github.com/bigchaindb/bigchaindb.git
-cd bigchaindb
+git clone https://github.com/riddleandcode/bigchaindb-v3.git
+cd bigchaindb-v3
 make run
 ```
 
-BigchainDB should be reachable now on `http://localhost:9984/`.
+R3C should be reachable now on `http://localhost:9984/`.
 
 There are also other commands you can execute:
 
-* `make start`: Run BigchainDB from source and daemonize it (stop it with `make stop`).
-* `make stop`: Stop BigchainDB.
+* `make start`: Run R3C from source and daemonize it (stop it with `make stop`).
+* `make stop`: Stop R3C.
 * `make logs`: Attach to the logs.
 * `make test`: Run all unit and acceptance tests.
 * `make test-unit-watch`: Run all tests and wait. Every time you change code, tests will be run again.
 * `make cov`: Check code coverage and open the result in the browser.
 * `make doc`: Generate HTML documentation and open it in the browser.
 * `make clean`: Remove all build, test, coverage and Python artifacts.
-* `make reset`: Stop and REMOVE all containers. WARNING: you will LOSE all data stored in BigchainDB.
+* `make reset`: Stop and REMOVE all containers. WARNING: you will LOSE all data stored in R3C.
 
 To view all commands available, run `make`.
 
